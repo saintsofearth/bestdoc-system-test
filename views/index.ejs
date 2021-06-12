@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>
+        <%=pageTitle%>
+    </title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Playlist</h1>
+    </header>
+
+    <main>
+        <table id="table-control">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Songs</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add playlist dynamically here... -->
+                <% if (playlists.length> 0) { %>
+                    <% playlists.forEach(playlist=> { %>
+                        <tr>
+                            <td>
+                                <span><%=playlist.name%></span>
+                                <input type="hidden" class="playlistId" value="<%=playlist._id%>">
+                            </td>
+                            <td class="songControl">
+                                <ul class="playlist-items">
+                                    <% if (playlist.songs.length> 0) { %>
+                                        <% playlist.songs.forEach(song=> { %>
+                                            <li>
+                                                <span><%=song.name%> <%=song.singer%></span>
+                                                <input type="hidden"  value="<%=song._id%>">
+                                                <button type="button" class="list-item"
+                                                    value="deleteSong">delete</button>
+                                            </li>
+                                        <% }) %>
+                                    <% } else { %>
+                                        <li>No song added to playlist. Please add...</li>
+                                    <% } %>
+                                </ul>
+                            </td>
+                            <td>
+                                <button type="button" value="addSong">add</button>
+                                <button type="button" value="deletePlaylist">delete</button>
+                            </td>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td>No playlist available, try adding one...</td>
+                    </tr>
+                <% } %>        
+                <tr id="playlistControl">
+                    <td>
+                        <button type="button" id="displayPlaylistBtn" value="addNewPlaylist">add new playlist</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <section>
+            <article class="addForm out-view playlistForm">
+                <i class="far fa-window-close playlistFormCloseIcon closeIcon"></i>
+                <input type="text" placeholder="Playlist name" id="playlistNameInput">
+                <button type="button" id="addPlaylistBtn">Add</button>
+            </article>
+        </section>
+
+        <section>
+            <article class="addForm out-view songForm">
+                <i class="far fa-window-close songFormCloseIcon closeIcon"></i>
+                <ul class="songs-list" id="songs">
+                    <% if (songs.length > 0) { %>
+                        <% songs.forEach(song => { %>
+                            <li class="song"> <span><%=song.name%></span> <span><%=song.singer%></span>
+                                <input type="hidden" value="<%=song._id%>" class="songId">
+                                <input type="checkbox" name="" value="<%=song.name%>">
+                            </li>
+                        <% }) %>
+                    <% } else { %>
+                        <li class="">No song available</li>
+                    <% } %>
+                </ul>
+                <div>
+                    <button type="button" id="addSongBtn">add</button>
+                </div>
+            </article>
+        </section>
+
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+
+</html>
