@@ -10,8 +10,9 @@ Function requirements:
 5. Home page should list the created playlists which gets updated in real time when a new playlist is added or deleted in another browser tab or window.
 6. The playlist should be persisted and fetched from a SQL database of your choice(H2, Postgres, or MySQL).
 
-tools used:
+Tools used:
 1. Node.js
 2. Express js
 3. MongoDB
 4. Fetch 
+5. EJS templating engine
